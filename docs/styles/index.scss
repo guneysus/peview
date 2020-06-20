@@ -1,0 +1,22 @@
+/**
+ * index.scss
+ * - Add any styles you want here!
+ */
+
+body {
+ height: 100vh;
+}
+
+.hexdump {
+ .block span.hex-value {  
+    &:hover {
+        background-color: rgba(#ff725c, 0.5);
+        cursor: pointer;
+        
+  }
+ }
+}
+
+.outline {
+ outline: 1px dashed gray;
+}

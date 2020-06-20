@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+ <!--  Meta  -->
+ <meta charset="UTF-8" />
+ <title>My New Pen!</title>
+
+ <!--  Styles  -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css">
+ <link rel="stylesheet" href="./styles/index.processed.css">
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+ 
+ <script src="./scripts/demo.data.js"></script>
+ <script src="./scripts/prototypes.js"></script>
+ <script src="./scripts/pe.module.js"></script>
+ <script src="./scripts/uploader.module.js"></script>
+ <script src="./scripts/ui.module.js"></script>
+ <script src="./scripts/app.module.js"></script>
+
+</head>
+
+<body class="bg-mid-gray">
+
+ <section class="w-80 center bg-light-gray pa3 ph5-ns bg-washed-yellow">
+
+  <div class="lh-copy measure code">
+   <h1 class="mt0 code">PE/hex viewer</h1>
+  </div>
+
+  <div class="upload-form">
+   <form enctype="multipart/form-data" class="bg-washed-green pa3 ba b--dotted code">
+    <div class="file-upload">
+     <input id="pe-file" type="file" accept=".exe,.dll" class="ml2 pa2" oninput="Uploader.upload(this)" />
+    </div>
+
+   </form>
+  </div>
+
+  <div class="hexdump-container ba b--dotted mt2">
+   <h2 class="mt0 code pl3 pt3" id="file-name"></h2>
+   <div class="dt-ns dt--fixed-ns">
+    <div class="dtc-ns tc w-10 bg-black-10">
+     <pre class="offset tr pr3 b" id="line-numbers"></pre>
+    </div>
+
+    <!-- (.block[data-start=$]>span[data-index=$][data-size=2 data-val="AE F0"]*16{AE F0})*4 -->
+    <div class="bg-near-white dtc-ns tl w-100 pl3 bg-black-05 hexdump code" id="pe-view">
+     <div class="b w-60" id="pe-ruler"></div>
+     <div id="hex-container" class="w-60 h-50">
+      <div id="hex-content"></div>      
+     </div>
+    </div>
+
+
+   </div>
+  </div>
+ 
+ </section>
+
+ <!-- Scripts -->
+ <script src="./scripts/index.js"></script>
+</body>
+
+</html>
