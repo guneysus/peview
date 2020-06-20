@@ -4,7 +4,7 @@ window.Uploader = (function() {
   
   UI.setTitle(file.name);
   
-  file.arrayBuffthen(result => {
+  file.arrayBuffer().then(result => {
    var data = new Uint8Array(result);
    PE.setData(data);
    UI.render(PE.getData());

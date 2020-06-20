@@ -14,9 +14,13 @@ window.UI = (function() {
    peContent.insertAdjacentElement("beforeend", block);
   });
 
+  limit = limit > array.length ? array.length : limit;
+  
   var lines = linenumbers(limit + (limit % 16 < 1 ? 16 : 0));
   var preContent = "\n" + lines.join("\n");
-  document.querySelector("pre#line-numbers").textContent = preContent;
+  var lineNumbersNode = document.querySelector("pre#line-numbers");
+  lineNumbersNode.innerHTML = null;
+  lineNumbersNode.textContent = preContent;
   
   // set title
   document.querySelector("h2#file-name").textContent = UI.getTitle();
