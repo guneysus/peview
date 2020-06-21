@@ -139,7 +139,7 @@ window.PE = (function() {
   _data = data;
   setCharacteristics(
    Number.parseInt(
-    UI.bytesToHex(PE.get(PE.range.coff.characteristics()).reverse())
+    UI.bytesToHex(PE.get(PE.range.coff.characteristics()))
    )
   );
  };
@@ -149,7 +149,7 @@ window.PE = (function() {
  };
 
  const get = function(param) {
-  return _data.slice(param.offset, param.offset + param.size);
+  return _data.slice(param.offset, param.offset + param.size).reverse();
  };
 
  const range = {
@@ -188,16 +188,22 @@ window.PE = (function() {
  };
 
  const signature = function() {
-  var raw = get(range.signature());
+  var raw = get(range.signature()).reverse();
   var hex = _.map(raw, UI.toHex);
   return hex;
  };
 
  const machine = function() {
-  var raw = get(range.coff.machine()).reverse();
+  var raw = get(range.coff.machine());
   var machineType = UI.bytesToHex(raw);
   var result = db.machineTypes[machineType];
   return result;
+ };
+
+ const numOfSections = function () {
+   var raw = get(range.coff.numberOfSections()).reverse();
+   var result = _.reduce(_.map(raw, function(val, i) { return val * (0x100**i); }), function(memo, num) { return memo + num; }, 0);
+   return result;
  };
 
  const characteristics = function() {
@@ -216,6 +222,20 @@ window.PE = (function() {
   
   return result;
  };
+ 
+ const timeDateStamp = function () {
+  var raw = get(range.coff.timeDateStamp()).reverse();
+  var result = _.reduce(_.map(raw, function(val, i) { return val * (0x100**i); }), function(memo, num) { return memo + num; }, 0);
+  debugger;
+  return result;
+ };
+
+ const sizeOfOptionalHeader = function() {
+  var raw = get(range.coff.sizeOfOptionalHeader()).reverse();
+  var result = _.reduce(_.map(raw, function(val, i) { return val * (0x100**i); }), function(memo, num) { return memo + num; }, 0);
+  debugger;
+  return result;
+ }
 
  var _characterisctics = 0;
  const getCharacteristics = function() {
@@ -226,14 +246,17 @@ window.PE = (function() {
  };
 
  return {
-  setData,
-  getData,
-  getCharacteristics,
-  setCharacteristics,
-  signature,
-  get,
-  machine,
-  characteristics,
-  range
+  setData
+  ,getData
+  ,characteristics
+  ,getCharacteristics
+  ,setCharacteristics
+  ,signature
+  ,get
+  ,machine
+  ,numOfSections
+  ,timeDateStamp
+  ,sizeOfOptionalHeader
+  ,range
  };
 })();

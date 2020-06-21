@@ -81,6 +81,17 @@ window.UI = (function() {
   return hex.join("");
  };
 
+ const toDecimal = function (...bytes) {
+   var sum = _.reduce(_.map(bytes, function(val, index){
+     return val << index;
+   }), function(memo, num){
+     return memo + num;
+   }, 0);
+
+   debugger;
+   return sum;
+ }
+
  const newWord = function(word, parent, index) {
   var span = document.createElement("span");
   span.classList = ["hex-value"];
@@ -140,5 +151,6 @@ window.UI = (function() {
   ,columns
   ,setTitle
   ,getTitle
+  ,toDecimal
  };
 })();
