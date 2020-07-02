@@ -237,6 +237,21 @@ window.PE = (function() {
   return result;
  }
 
+ const optionalHeader = function() {
+  var db = {
+    "010b": {
+      name: "PE32"
+    },
+    "020b": {
+      name: "PE32+"
+    }
+  };
+
+  var raw = UI.bytesToHex(PE.get({offset:0x98, size:2}));
+
+
+ }
+
  var _characterisctics = 0;
  const getCharacteristics = function() {
   return _characterisctics;
